@@ -1,1 +1,3 @@
-# recipe-app
+# AI Powered Recipe App
+## MERN Stack Application
+
