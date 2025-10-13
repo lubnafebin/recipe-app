@@ -1,9 +1,15 @@
 import { useEffect, useState } from "react";
 import { Navbar } from "../components/Navbar";
 import { useParams } from "react-router-dom";
+import { FaUser } from "react-icons/fa";
+import Moment from "moment";
 export const Recipe = () => {
   const { id } = useParams();
   const [data, setData] = useState(null);
+  const [comments, setComments] = useState([]);
+  const [name, setName] = useState("");
+  const [content, setContent] = useState("");
+
   const recipeData = [
     {
       _id: "1",
@@ -78,16 +84,104 @@ export const Recipe = () => {
         "A smooth and refreshing dessert made with ripe mango pulp and creamy milk — perfect for summer.",
     },
   ];
+  const commentsData = [
+    {
+      _id: 1,
+      recipe: recipeData[0],
+      name: "michel",
+      content: "comment",
+      isApproved: false,
+      createdAt: "2025-04-30T09:30:06.918Z",
+      updatedAt: "2025-04-30T09:30:06.918Z",
+    },
+    {
+      _id: 2,
+      recipe: recipeData[1],
+      name: "michele",
+      content: "comment",
+      isApproved: false,
+      createdAt: "2025-04-30T09:30:06.918Z",
+      updatedAt: "2025-04-30T09:30:06.918Z",
+    },
+  ];
+
   const fetchRecipeData = async () => {
     const data = recipeData.find((item) => item._id === id);
     setData(data);
   };
+
+  const fetchComments = async () => {
+    setComments(commentsData);
+  };
+
+  const addComment = async (e) => {
+    e.preventDefault();
+  };
+
   useEffect(() => {
     fetchRecipeData();
+    fetchComments();
   }, []);
   return data ? (
     <div className="relative">
       <Navbar />
+      <div className="max-w-xl md:mx-auto mt-3">
+        <img src={data.image} alt="img" className="rounded-3xl mb-5" />
+        <h1 className="text-3xl sm:text-5xl font-semibold max-w-2xl text-gray-800">
+          {data.title}
+        </h1>
+        <p className="mt-4">{data.description}</p>
+        <div className="mt-14 mb-10 max-w-3xl mx-auto">
+          <p className="font-semibold mb-4">Comments ({comments.length})</p>
+          <div className="flex flex-col gap-4">
+            {comments.map((item, index) => (
+              <div
+                key={index}
+                className="relative bg-primary/2 border border-primary/5 max-w-xl p-4
+              rounded text-gray-600"
+              >
+                <div className="flex items-center gap-2 mb-2">
+                  <FaUser className="text-primary w-6" />
+                  <p className="font-medium">{item.name}</p>
+                </div>
+                <p className="text-sm max-w-md ml-8">{item.content}</p>
+                <div className="absolute right-4 bottom-3 flex items-center gap-2 text-xs">
+                  {Moment(item.createdAt).fromNow()}
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="max-w-3xl mx-auto mt-4">
+            <p className="font-semibold mb-4">Add Your Comment</p>
+            <form
+              onSubmit={addComment}
+              className="flex flex-col items-start gap-4 max-w-lg"
+            >
+              <input
+                onChange={(e) => setName(e.target.value)}
+                value={name}
+                type="text"
+                placeholder="Name"
+                required
+                className="w-full p-2 border border-gray-300 rounded outline-null"
+              />
+              <textarea
+                onChange={(e) => setContent(e.target.value)}
+                value={content}
+                className="w-full p-2 border border-gray-300 rounded outline-none h-48"
+                placeholder="Comment"
+                required
+              ></textarea>
+              <button
+                type="submit"
+                className="bg-primary text-white rounded p-2 px-8 hover:scale-102 transition-all cursor-pointer"
+              >
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   ) : (
     <div>Loading...</div>
