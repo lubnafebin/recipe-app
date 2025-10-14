@@ -5,6 +5,7 @@ import { FaFacebook, FaTwitter, FaUser } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
 import Moment from "moment";
 import { Footer } from "../components/Footer";
+import { Loader } from "../components/Loader";
 export const Recipe = () => {
   const { id } = useParams();
   const [data, setData] = useState(null);
@@ -198,6 +199,6 @@ export const Recipe = () => {
       <Footer />
     </div>
   ) : (
-    <div>Loading...</div>
+    <Loader />
   );
 };
