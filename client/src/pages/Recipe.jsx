@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { Navbar } from "../components/Navbar";
 import { useParams } from "react-router-dom";
-import { FaUser } from "react-icons/fa";
+import { FaFacebook, FaTwitter, FaUser } from "react-icons/fa";
+import { IoLogoWhatsapp } from "react-icons/io";
 import Moment from "moment";
+import { Footer } from "../components/Footer";
 export const Recipe = () => {
   const { id } = useParams();
   const [data, setData] = useState(null);
@@ -180,8 +182,20 @@ export const Recipe = () => {
               </button>
             </form>
           </div>
+
+          <div className="my-24 max-w-3xl mx-auto">
+            <p className="font-semibold my-4">
+              Share this Recipe on Social Media
+            </p>
+            <div className="flex gap-4 cursor-pointer">
+              <FaFacebook className="text-primary" />
+              <FaTwitter className="text-primary" />
+              <IoLogoWhatsapp className="text-primary" />
+            </div>
+          </div>
         </div>
       </div>
+      <Footer />
     </div>
   ) : (
     <div>Loading...</div>
