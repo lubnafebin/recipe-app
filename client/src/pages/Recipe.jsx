@@ -397,7 +397,7 @@ export const Recipe = () => {
           </div>
 
           {/* Share Section */}
-          <div className="my-24 max-w-3xl mx-auto">
+          <div className="my-10 max-w-3xl mx-auto">
             <p className="font-semibold my-4">
               Share this Recipe on Social Media
             </p>
