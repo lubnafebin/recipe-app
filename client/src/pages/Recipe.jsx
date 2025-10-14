@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
 import { Navbar } from "../components/Navbar";
 import { useParams } from "react-router-dom";
-import { FaFacebook, FaTwitter, FaUser } from "react-icons/fa";
+import {
+  FaClock,
+  FaFacebook,
+  FaHeart,
+  FaTwitter,
+  FaUser,
+} from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
 import Moment from "moment";
 import { Footer } from "../components/Footer";
@@ -22,6 +28,27 @@ export const Recipe = () => {
       category: "Traditional Flavors",
       description:
         "A crispy South Indian crepe made from rice and lentil batter, filled with a spiced potato masala. Served hot with coconut chutney and sambar.",
+      time: "40 min",
+      likes: 245,
+      ingredients: [
+        "2 cups dosa batter",
+        "2 large boiled potatoes",
+        "1 onion, finely chopped",
+        "2 green chilies, chopped",
+        "1/2 tsp mustard seeds",
+        "1/2 tsp turmeric powder",
+        "8-10 curry leaves",
+        "1 tbsp oil or ghee",
+        "Salt to taste",
+      ],
+      instructions: [
+        "Heat oil in a pan and add mustard seeds, curry leaves, and chopped onions.",
+        "Sauté until golden, then add green chilies, turmeric, and mashed boiled potatoes.",
+        "Mix well with salt and cook for 2-3 minutes; this is your masala filling.",
+        "Heat a non-stick pan, pour a ladle of dosa batter, and spread it in a thin circle.",
+        "Add a spoon of oil around the edges and cook until crisp.",
+        "Place the potato masala in the center, fold the dosa, and serve hot with chutney and sambar.",
+      ],
     },
     {
       _id: "2",
@@ -31,6 +58,22 @@ export const Recipe = () => {
       category: "Healthy Choices",
       description:
         "A creamy blend of ripe avocado, honey, and milk for a quick and nutritious breakfast or post-workout drink.",
+      time: "10 min",
+      likes: 180,
+      ingredients: [
+        "1 ripe avocado",
+        "1 cup chilled milk (or almond milk)",
+        "1 tbsp honey or maple syrup",
+        "3-4 ice cubes",
+        "1/2 tsp vanilla extract (optional)",
+      ],
+      instructions: [
+        "Cut the avocado in half, remove the pit, and scoop out the flesh.",
+        "Add avocado, milk, honey, ice cubes, and vanilla extract to a blender.",
+        "Blend until smooth and creamy.",
+        "Pour into a glass and serve immediately.",
+        "Optionally, top with chia seeds or crushed nuts.",
+      ],
     },
     {
       _id: "3",
@@ -40,6 +83,27 @@ export const Recipe = () => {
       category: "Quick & Easy",
       description:
         "Soft paneer cubes cooked in spicy sauce and wrapped in warm roti with fresh veggies — a perfect on-the-go meal.",
+      time: "40 min",
+      likes: 245,
+      ingredients: [
+        "2 cups dosa batter",
+        "2 large boiled potatoes",
+        "1 onion, finely chopped",
+        "2 green chilies, chopped",
+        "1/2 tsp mustard seeds",
+        "1/2 tsp turmeric powder",
+        "8-10 curry leaves",
+        "1 tbsp oil or ghee",
+        "Salt to taste",
+      ],
+      instructions: [
+        "Heat oil in a pan and add mustard seeds, curry leaves, and chopped onions.",
+        "Sauté until golden, then add green chilies, turmeric, and mashed boiled potatoes.",
+        "Mix well with salt and cook for 2-3 minutes; this is your masala filling.",
+        "Heat a non-stick pan, pour a ladle of dosa batter, and spread it in a thin circle.",
+        "Add a spoon of oil around the edges and cook until crisp.",
+        "Place the potato masala in the center, fold the dosa, and serve hot with chutney and sambar.",
+      ],
     },
     {
       _id: "4",
@@ -49,6 +113,22 @@ export const Recipe = () => {
       category: "Sweet Treats",
       description:
         "A rich and gooey chocolate dessert with a molten center, best enjoyed warm with vanilla ice cream.",
+      time: "10 min",
+      likes: 180,
+      ingredients: [
+        "1 ripe avocado",
+        "1 cup chilled milk (or almond milk)",
+        "1 tbsp honey or maple syrup",
+        "3-4 ice cubes",
+        "1/2 tsp vanilla extract (optional)",
+      ],
+      instructions: [
+        "Cut the avocado in half, remove the pit, and scoop out the flesh.",
+        "Add avocado, milk, honey, ice cubes, and vanilla extract to a blender.",
+        "Blend until smooth and creamy.",
+        "Pour into a glass and serve immediately.",
+        "Optionally, top with chia seeds or crushed nuts.",
+      ],
     },
     {
       _id: "5",
@@ -58,6 +138,27 @@ export const Recipe = () => {
       category: "Traditional Flavors",
       description:
         "Tangy and aromatic rice flavored with lemon juice, curry leaves, and mustard seeds — a South Indian comfort food favorite.",
+      time: "40 min",
+      likes: 245,
+      ingredients: [
+        "2 cups dosa batter",
+        "2 large boiled potatoes",
+        "1 onion, finely chopped",
+        "2 green chilies, chopped",
+        "1/2 tsp mustard seeds",
+        "1/2 tsp turmeric powder",
+        "8-10 curry leaves",
+        "1 tbsp oil or ghee",
+        "Salt to taste",
+      ],
+      instructions: [
+        "Heat oil in a pan and add mustard seeds, curry leaves, and chopped onions.",
+        "Sauté until golden, then add green chilies, turmeric, and mashed boiled potatoes.",
+        "Mix well with salt and cook for 2-3 minutes; this is your masala filling.",
+        "Heat a non-stick pan, pour a ladle of dosa batter, and spread it in a thin circle.",
+        "Add a spoon of oil around the edges and cook until crisp.",
+        "Place the potato masala in the center, fold the dosa, and serve hot with chutney and sambar.",
+      ],
     },
     {
       _id: "6",
@@ -67,6 +168,22 @@ export const Recipe = () => {
       category: "Healthy Choices",
       description:
         "Wholesome pancakes made from oats, banana, and milk — a guilt-free and filling breakfast option.",
+      time: "10 min",
+      likes: 180,
+      ingredients: [
+        "1 ripe avocado",
+        "1 cup chilled milk (or almond milk)",
+        "1 tbsp honey or maple syrup",
+        "3-4 ice cubes",
+        "1/2 tsp vanilla extract (optional)",
+      ],
+      instructions: [
+        "Cut the avocado in half, remove the pit, and scoop out the flesh.",
+        "Add avocado, milk, honey, ice cubes, and vanilla extract to a blender.",
+        "Blend until smooth and creamy.",
+        "Pour into a glass and serve immediately.",
+        "Optionally, top with chia seeds or crushed nuts.",
+      ],
     },
     {
       _id: "7",
@@ -76,6 +193,27 @@ export const Recipe = () => {
       category: "Quick & Easy",
       description:
         "Stir-fried noodles tossed with colorful vegetables and soy sauce — quick to make and full of flavor.",
+      time: "40 min",
+      likes: 245,
+      ingredients: [
+        "2 cups dosa batter",
+        "2 large boiled potatoes",
+        "1 onion, finely chopped",
+        "2 green chilies, chopped",
+        "1/2 tsp mustard seeds",
+        "1/2 tsp turmeric powder",
+        "8-10 curry leaves",
+        "1 tbsp oil or ghee",
+        "Salt to taste",
+      ],
+      instructions: [
+        "Heat oil in a pan and add mustard seeds, curry leaves, and chopped onions.",
+        "Sauté until golden, then add green chilies, turmeric, and mashed boiled potatoes.",
+        "Mix well with salt and cook for 2-3 minutes; this is your masala filling.",
+        "Heat a non-stick pan, pour a ladle of dosa batter, and spread it in a thin circle.",
+        "Add a spoon of oil around the edges and cook until crisp.",
+        "Place the potato masala in the center, fold the dosa, and serve hot with chutney and sambar.",
+      ],
     },
     {
       _id: "8",
@@ -85,6 +223,22 @@ export const Recipe = () => {
       category: "Sweet Treats",
       description:
         "A smooth and refreshing dessert made with ripe mango pulp and creamy milk — perfect for summer.",
+      time: "10 min",
+      likes: 180,
+      ingredients: [
+        "1 ripe avocado",
+        "1 cup chilled milk (or almond milk)",
+        "1 tbsp honey or maple syrup",
+        "3-4 ice cubes",
+        "1/2 tsp vanilla extract (optional)",
+      ],
+      instructions: [
+        "Cut the avocado in half, remove the pit, and scoop out the flesh.",
+        "Add avocado, milk, honey, ice cubes, and vanilla extract to a blender.",
+        "Blend until smooth and creamy.",
+        "Pour into a glass and serve immediately.",
+        "Optionally, top with chia seeds or crushed nuts.",
+      ],
     },
   ];
   const commentsData = [
@@ -92,7 +246,7 @@ export const Recipe = () => {
       _id: 1,
       recipe: recipeData[0],
       name: "michel",
-      content: "comment",
+      content: "This Recipe is Easy.made it for dinner today",
       isApproved: false,
       createdAt: "2025-04-30T09:30:06.918Z",
       updatedAt: "2025-04-30T09:30:06.918Z",
@@ -101,7 +255,7 @@ export const Recipe = () => {
       _id: 2,
       recipe: recipeData[1],
       name: "michele",
-      content: "comment",
+      content: "Easy to follow and delicious result",
       isApproved: false,
       createdAt: "2025-04-30T09:30:06.918Z",
       updatedAt: "2025-04-30T09:30:06.918Z",
@@ -128,20 +282,76 @@ export const Recipe = () => {
   return data ? (
     <div className="relative">
       <Navbar />
-      <div className="max-w-xl md:mx-auto mt-3">
-        <img src={data.image} alt="img" className="rounded-3xl mb-5" />
-        <h1 className="text-3xl sm:text-5xl font-semibold max-w-2xl text-gray-800">
+      <div className="max-w-4xl mx-auto mt-6 px-4">
+        {/* Recipe Image */}
+        <img
+          src={data.image}
+          alt="img"
+          className="rounded-3xl mb-5 w-full h-80 object-cover shadow-md"
+        />
+
+        {/* Title */}
+        <h1 className="text-2xl sm:text-5xl font-semibold text-gray-700">
           {data.title}
         </h1>
-        <p className="mt-4">{data.description}</p>
+
+        {/* Description */}
+        <p className="mt-4 text-gray-600">{data.description}</p>
+
+        {/* Time & Likes Section */}
+        <div className="flex items-center gap-6 mt-4 text-gray-500">
+          <div className="flex items-center gap-2">
+            <FaClock className="text-primary" />
+            <span>{data.time}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <FaHeart className="text-red-500" />
+            <span>{data.likes}</span>
+          </div>
+        </div>
+
+        {/* Horizontal Line */}
+        <hr className="my-6 border-gray-300" />
+
+        {/* Ingredients and Instructions */}
+        <div className="grid md:grid-cols-2 gap-6 mt-6">
+          {/* Ingredients Box */}
+          {data.ingredients?.length > 0 && (
+            <div className="p-5 bg-gray-50 border border-gray-200 rounded-xl shadow-sm">
+              <h2 className="text-xl font-semibold text-gray-800 mb-3">
+                Ingredients
+              </h2>
+              <ul className="list-disc list-inside text-gray-600 space-y-1">
+                {data.ingredients.map((item, index) => (
+                  <li key={index}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* Instructions Box */}
+          {data.instructions?.length > 0 && (
+            <div className="p-5 bg-gray-50 border border-gray-200 rounded-xl shadow-sm">
+              <h2 className="text-xl font-semibold text-gray-800 mb-3">
+                Instructions
+              </h2>
+              <ol className="list-decimal list-inside text-gray-600 space-y-2">
+                {data.instructions.map((step, index) => (
+                  <li key={index}>{step}</li>
+                ))}
+              </ol>
+            </div>
+          )}
+        </div>
+
+        {/* Comment Section */}
         <div className="mt-14 mb-10 max-w-3xl mx-auto">
           <p className="font-semibold mb-4">Comments ({comments.length})</p>
           <div className="flex flex-col gap-4">
             {comments.map((item, index) => (
               <div
                 key={index}
-                className="relative bg-primary/2 border border-primary/5 max-w-xl p-4
-              rounded text-gray-600"
+                className="relative bg-primary/2 border border-primary/5 max-w-xl p-4 rounded text-gray-600"
               >
                 <div className="flex items-center gap-2 mb-2">
                   <FaUser className="text-primary w-6" />
@@ -154,6 +364,8 @@ export const Recipe = () => {
               </div>
             ))}
           </div>
+
+          {/* Add Comment Form */}
           <div className="max-w-3xl mx-auto mt-4">
             <p className="font-semibold mb-4">Add Your Comment</p>
             <form
@@ -166,7 +378,7 @@ export const Recipe = () => {
                 type="text"
                 placeholder="Name"
                 required
-                className="w-full p-2 border border-gray-300 rounded outline-null"
+                className="w-full p-2 border border-gray-300 rounded outline-none"
               />
               <textarea
                 onChange={(e) => setContent(e.target.value)}
@@ -184,6 +396,7 @@ export const Recipe = () => {
             </form>
           </div>
 
+          {/* Share Section */}
           <div className="my-24 max-w-3xl mx-auto">
             <p className="font-semibold my-4">
               Share this Recipe on Social Media
