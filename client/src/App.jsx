@@ -7,6 +7,7 @@ import { ListRecipe } from "./pages/admin/ListRecipe";
 import { AddRecipe } from "./pages/admin/AddRecipe";
 import { Comments } from "./pages/admin/Comments";
 import { Login } from "./components/admin/Login";
+import "quill/dist/quill.snow.css";
 export const App = () => {
   return (
     <div>
