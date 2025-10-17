@@ -3,6 +3,7 @@ import "dotenv/config";
 import cors from "cors";
 import connectDB from "./configs/connection.js";
 import adminRouter from "./routes/adminRoutes.js";
+import recipeRouter from "./routes/recipeRoutes.js";
 
 const app = express();
 await connectDB();
@@ -15,7 +16,8 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.send("API is working");
 });
-app.use('/api/admin',adminRouter)
+app.use("/api/admin", adminRouter);
+app.use("/api/recipe", recipeRouter);
 
 const PORT = process.env.PORT || 3000;
 
