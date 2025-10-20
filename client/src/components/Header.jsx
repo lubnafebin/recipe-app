@@ -1,6 +1,14 @@
 import { CiSearch } from "react-icons/ci";
 import { FaStar } from "react-icons/fa";
+import { useAppContext } from "../context/AppContext";
+import { useRef } from "react";
 export const Header = () => {
+  const { setInput } = useAppContext();
+  const inputRef = useRef();
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    setInput(inputRef.current.value);
+  };
   return (
     <div className="mx-8 sm:mx-16 xl:mx-24 relative">
       <div className="text-center mt-8 mb-8">
@@ -23,10 +31,12 @@ export const Header = () => {
           community
         </p>
         <form
+          onSubmit={onSubmitHandler}
           className="flex justify-between max-w-lg max-sm:scale-75 mx-auto
         border border-gray-300 bg-white rounded overflow-hidden "
         >
           <input
+            ref={inputRef}
             className="w-full pl-4 outline-none"
             type="text"
             placeholder="Search Recipes..."
