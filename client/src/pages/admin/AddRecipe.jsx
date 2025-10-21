@@ -1,12 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import Quill from "quill";
 import { useAppContext } from "../../context/AppContext";
+import toast from "react-hot-toast";
+import { data } from "react-router-dom";
 
 export const AddRecipe = () => {
   const editorRef = useRef(null);
   const quillRef = useRef(null);
 
   const { axios } = useAppContext();
+  const [isAdding, setIsAdding] = useState(false);
 
   const [image, setImage] = useState(false);
   const [title, setTitle] = useState("");
@@ -18,18 +21,28 @@ export const AddRecipe = () => {
   const [isPublished, setIsPublished] = useState(false);
 
   const recipeCategories = [
-    "healthy",
-    "veg",
-    "Non veg",
-    "spicy",
-    "sweet",
-    "traditional",
+    "Quick & Easy",
+    "Healthy Choices",
+    "Traditional Flavors",
+    "Sweet Treats",
   ];
 
   const generateContent = async () => {};
 
+  const removeIngredient = (index) => {
+    setIngredients(ingredients.filter((_, i) => i !== index));
+  };
+
+  const addIngredient = () => {
+    if (newIngredient.trim() !== "") {
+      setIngredients([...ingredients, newIngredient.trim()]);
+      setNewIngredient("");
+    }
+  };
+
   const onSubmitHandler = async (e) => {
     e.preventDefault();
+    setIsAdding(true);
     if (!image || !title || !description || !category) {
       return alert("Please fill all required fields");
     }
@@ -49,12 +62,12 @@ export const AddRecipe = () => {
     formData.append("image", image);
 
     try {
-      const res = await axios.post("/api/recipes/add", formData, {
+      const res = await axios.post("/api/recipe/add", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
       if (res.data.success) {
-        alert("Recipe added successfully!");
+        toast.success(res.data.message);
         // Reset form
         setTitle("");
         setDescription("");
@@ -64,11 +77,12 @@ export const AddRecipe = () => {
         setImage(null);
         setIsPublished(false);
       } else {
-        alert(res.data.message || "Something went wrong");
+        toast.error(data.message);
       }
     } catch (error) {
-      console.error(error);
-      alert("Error submitting recipe");
+      toast.error(error.message);
+    } finally {
+      setIsAdding(false);
     }
   };
 
@@ -154,8 +168,8 @@ export const AddRecipe = () => {
           />
           <button
             type="button"
-            // onClick={addIngredient}
-            className="bg-primary text-white px-3 rounded"
+            onClick={addIngredient}
+            className="bg-primary text-white px-3 rounded cursor-pointer"
           >
             Add
           </button>
@@ -169,7 +183,7 @@ export const AddRecipe = () => {
               {item}
               <button
                 type="button"
-                // onClick={() => removeIngredient(index)}
+                onClick={() => removeIngredient(index)}
                 className="text-red-500"
               >
                 ×
@@ -209,10 +223,11 @@ export const AddRecipe = () => {
 
         {/* Submit */}
         <button
+          disabled={isAdding}
           type="submit"
           className="mt-8 w-40 h-10 bg-primary hover:bg-primary/80 text-white rounded cursor-pointer text-sm"
         >
-          Add Recipe
+          {isAdding ? "Adding..." : "Add Recipe"}
         </button>
       </div>
     </form>
