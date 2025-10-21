@@ -4,39 +4,28 @@ import { MdOutlineDrafts } from "react-icons/md";
 import { LuChefHat } from "react-icons/lu";
 import { RiFileListLine } from "react-icons/ri";
 import { RecipeTableItem } from "../../components/admin/RecipeTableItem";
+import { useAppContext } from "../../context/AppContext";
+import toast from "react-hot-toast";
 export const Dashboard = () => {
+  const { axios } = useAppContext();
   const [dashboardData, setDashboardData] = useState({
     recipes: 0,
     comments: 0,
     drafts: 0,
     recentBlogs: [],
   });
-  const dashboard_data = {
-    recipes: 10,
-    comments: 5,
-    drafts: 2,
-    recentBlogs: [
-      {
-        _id: 0o1,
-        title: "Masala Dosa",
-        date: "2025-10-14",
-        status: "published",
-        actions: "",
-        createdAt: "2025-04-30T09:30:06.918Z",
-      },
-      {
-        _id: 0o2,
-        title: "Avocado Smoothie",
-        date: "2025-10-13",
-        status: "published",
-        actions: "",
-        createdAt: "2025-04-30T09:30:06.918Z",
-      },
-    ],
-  };
+
   const fetchDashboard = async () => {
-    setDashboardData(dashboard_data);
+    try {
+      const { data } = await axios.get("/api/admin/dashboard");
+      data.success
+        ? setDashboardData(data.dashboardData)
+        : toast.error(data.message);
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
+
   useEffect(() => {
     fetchDashboard();
   }, []);
@@ -110,7 +99,7 @@ export const Dashboard = () => {
               </tr>
             </thead>
             <tbody>
-              {dashboardData.recentBlogs.map((recipe, index) => {
+              {dashboardData.recentRecipes?.map((recipe, index) => {
                 return (
                   <RecipeTableItem
                     key={recipe._id}
