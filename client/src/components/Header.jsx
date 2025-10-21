@@ -1,14 +1,9 @@
-import { CiSearch } from "react-icons/ci";
 import { FaStar } from "react-icons/fa";
 import { useAppContext } from "../context/AppContext";
 import { useRef } from "react";
 export const Header = () => {
-  const { setInput } = useAppContext();
+  const { setInput, input } = useAppContext();
   const inputRef = useRef();
-  const onSubmitHandler = (e) => {
-    e.preventDefault();
-    setInput(inputRef.current.value);
-  };
   return (
     <div className="mx-8 sm:mx-16 xl:mx-24 relative">
       <div className="text-center mt-8 mb-8">
@@ -30,25 +25,15 @@ export const Header = () => {
           Explore AI Powered recipes,share your favorites and join our culinary
           community
         </p>
-        <form
-          onSubmit={onSubmitHandler}
-          className="flex justify-between max-w-lg max-sm:scale-75 mx-auto
-        border border-gray-300 bg-white rounded overflow-hidden "
-        >
+        <form className="flex justify-between max-w-lg mx-auto">
           <input
             ref={inputRef}
-            className="w-full pl-4 outline-none"
             type="text"
+            value={input}
             placeholder="Search Recipes..."
-            required
+            onChange={(e) => setInput(e.target.value)}
+            className="w-full border border-gray-300 rounded-lg px-4 py-2 outline-none focus:ring-1 focus:ring-primary/40"
           />
-          <button
-            type="submit"
-            className="bg-primary text-white px-8 py-2 m-1.5 
-          rounded hover:scale-105 transition-all cursor-pointer"
-          >
-            <CiSearch />
-          </button>
         </form>
       </div>
     </div>
