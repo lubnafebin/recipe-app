@@ -127,9 +127,11 @@ export const Recipe = () => {
                 Instructions
               </h2>
               <ol className="list-decimal list-inside text-gray-600 space-y-2">
-                {data.instructions.map((step, index) => (
-                  <li key={index}>{step}</li>
-                ))}
+                {data.instructions
+                  .filter((step) => step.trim() !== "")
+                  .map((step, index) => (
+                    <li key={index}>{step}</li>
+                  ))}
               </ol>
             </div>
           )}
