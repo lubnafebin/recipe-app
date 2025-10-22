@@ -3,6 +3,7 @@ import {
   addComment,
   addRecipe,
   deleteRecipeById,
+  generateContent,
   getAllRecipes,
   getRecipeById,
   getRecipeComments,
@@ -20,5 +21,6 @@ recipeRouter.post("/delete", auth, deleteRecipeById);
 recipeRouter.post("/toggle-publish", auth, togglePublish);
 recipeRouter.post("/add-comment", addComment);
 recipeRouter.post("/comments", getRecipeComments);
+recipeRouter.post("/generate", auth, generateContent);
 
 export default recipeRouter;

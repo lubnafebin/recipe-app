@@ -2,6 +2,7 @@ import fs from "fs";
 import imagekit from "../configs/imageKit.js";
 import Recipe from "../models/Recipe.js";
 import Comment from "../models/Comment.js";
+import main from "../configs/gemini.js";
 
 export const addRecipe = async (req, res) => {
   try {
@@ -116,6 +117,24 @@ export const getRecipeComments = async (req, res) => {
       isApproved: true,
     }).sort({ createdAt: -1 });
     res.json({ success: true, comments });
+  } catch (error) {
+    res.json({ success: false, message: error.message });
+  }
+};
+
+export const generateContent = async (req, res) => {
+  try {
+    const { title, ingredients } = req.body;
+
+    const prompt = `
+      Recipe Title: ${title}
+      Ingredients: ${ingredients.join(", ")}
+
+      Generate clear, simple cooking instructions for this recipe.
+      Each step should be concise and beginner-friendly.
+    `;
+    const content = await main(prompt);
+    res.json({ success: true, content });
   } catch (error) {
     res.json({ success: false, message: error.message });
   }
