@@ -10,6 +10,7 @@ export const AddRecipe = () => {
 
   const { axios } = useAppContext();
   const [isAdding, setIsAdding] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const [image, setImage] = useState(false);
   const [title, setTitle] = useState("");
@@ -27,7 +28,33 @@ export const AddRecipe = () => {
     "Sweet Treats",
   ];
 
-  const generateContent = async () => {};
+  const generateContent = async () => {
+    if (!title.trim()) return toast.error("Enter recipe title first!");
+    if (ingredients.length === 0) return toast.error("Add ingredients first!");
+
+    try {
+      setLoading(true);
+      const { data } = await axios.post("/api/recipe/generate", {
+        title,
+        ingredients,
+      });
+      let cleanText = data.content
+        .replace(/\*\*/g, "")
+        .replace(/^\d+\.\s*/gm, "")
+        .replace(/[-*]\s*/g, "");
+      if (data.success) {
+        setInstructions(
+          cleanText.split("\n").filter((line) => line.trim() !== "")
+        );
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const removeIngredient = (index) => {
     setIngredients(ingredients.filter((_, i) => i !== index));
@@ -201,10 +228,19 @@ export const AddRecipe = () => {
             placeholder="Write or generate instructions..."
             className="w-full border rounded p-2 h-40"
           ></textarea>
+          {loading && (
+            <div
+              className="absolute right-0 top-0 bottom-0 left-0 flex items-center 
+            justify-center bg-black/10"
+            >
+              <div className="w-8 h-8 rounded-full border-2 border-t-white animate-spin"></div>
+            </div>
+          )}
           <button
+            disabled={loading}
             type="button"
             onClick={generateContent}
-            className="absolute bottom-2 right-2 text-xs text-white bg-black/70 px-3 py-1.5 rounded"
+            className="absolute bottom-2 right-2 text-xs text-white bg-black/70 px-3 py-1.5 rounded cursor-pointer"
           >
             Generate with AI
           </button>
