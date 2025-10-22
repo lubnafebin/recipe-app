@@ -124,18 +124,34 @@ export const getRecipeComments = async (req, res) => {
 
 export const generateContent = async (req, res) => {
   try {
-    const { title, ingredients } = req.body;
+    const { title, ingredients, prompt } = req.body;
+    let aiPrompt = "";
 
-    const prompt = `
+    if (ingredients && title) {
+      aiPrompt = `
       Recipe Title: ${title}
       Ingredients: ${ingredients.join(", ")}
 
       Generate clear, simple cooking instructions for this recipe.
       Each step should be concise and beginner-friendly.
     `;
-    const content = await main(prompt);
+    } else if (prompt) {
+      aiPrompt = prompt;
+    } else {
+      return res.json({
+        success: false,
+        message: "Provide either ingredients & title or a prompt",
+      });
+    }
+    const content = await main(aiPrompt);
     res.json({ success: true, content });
   } catch (error) {
+    if (error.message.includes("overloaded")) {
+      return res.json({
+        success: false,
+        message: "AI is busy, try again shortly.",
+      });
+    }
     res.json({ success: false, message: error.message });
   }
 };

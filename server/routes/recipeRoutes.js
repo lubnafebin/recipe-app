@@ -21,6 +21,6 @@ recipeRouter.post("/delete", auth, deleteRecipeById);
 recipeRouter.post("/toggle-publish", auth, togglePublish);
 recipeRouter.post("/add-comment", addComment);
 recipeRouter.post("/comments", getRecipeComments);
-recipeRouter.post("/generate", auth, generateContent);
+recipeRouter.post("/generate", generateContent);
 
 export default recipeRouter;
