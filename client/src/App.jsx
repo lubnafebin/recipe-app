@@ -10,6 +10,7 @@ import { Login } from "./components/admin/Login";
 import "quill/dist/quill.snow.css";
 import { Toaster } from "react-hot-toast";
 import { useAppContext } from "./context/AppContext";
+import { AIGenerator } from "./pages/AIGenerator";
 export const App = () => {
   const { token } = useAppContext();
 
@@ -19,6 +20,7 @@ export const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/recipe/:id" element={<Recipe />} />
+        <Route path="/generate" element={<AIGenerator />} />
         <Route path="/admin" element={token ? <Layout /> : <Login />}>
           <Route index element={<Dashboard />} />
           <Route path="add-recipe" element={<AddRecipe />} />
