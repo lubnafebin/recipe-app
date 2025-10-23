@@ -29,7 +29,7 @@ export const RecipeList = () => {
   return (
     <div>
       <div
-        className="flex justify-center gap-4 sm:gap-8 my-10
+        className="hidden sm:flex justify-center gap-4 sm:gap-8 my-10
       relative"
       >
         {recipeCategory.map((item) => (
