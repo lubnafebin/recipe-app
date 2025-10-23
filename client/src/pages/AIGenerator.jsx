@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { BsStars } from "react-icons/bs";
 import axios from "axios";
+import { FaArrowUp } from "react-icons/fa6";
 import toast from "react-hot-toast";
 
 export const AIGenerator = () => {
@@ -113,11 +114,11 @@ export const AIGenerator = () => {
         <button
           onClick={handleGenerate}
           disabled={loading}
-          className={`bg-primary text-white px-6 py-2 rounded-xl text-sm font-medium transition-all ${
+          className={`bg-primary/20 text-white rounded-full p-2 transition-all ${
             loading ? "opacity-50 cursor-not-allowed" : "hover:scale-105"
           }`}
         >
-          {loading ? "loading..." : "Generate"}
+          <FaArrowUp className="w-6 h-6 text-primary" />
         </button>
       </div>
     </section>
