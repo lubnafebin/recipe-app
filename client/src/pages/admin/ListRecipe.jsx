@@ -37,7 +37,7 @@ export const ListRecipe = () => {
               <th scope="col" className="px-2 py-4">
                 Recipe Title
               </th>
-              <th scope="col" className="px-2 py-4">
+              <th scope="col" className="px-2 py-4 max-sm:hidden">
                 Date
               </th>
               <th scope="col" className="px-2 py-4 max-sm:hidden">
