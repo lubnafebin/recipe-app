@@ -1,6 +1,7 @@
 import express from "express";
 import {
   adminLogin,
+  adminRegister,
   approveCommentById,
   deleteCommentById,
   getAllComments,
@@ -11,6 +12,7 @@ import auth from "../middleware/auth.js";
 
 const adminRouter = express.Router();
 
+userRouter.post("/register", adminRegister);
 adminRouter.post("/login", adminLogin);
 adminRouter.get("/comments", auth, getAllComments);
 adminRouter.get("/recipes", getAllRecipesAdmin);
