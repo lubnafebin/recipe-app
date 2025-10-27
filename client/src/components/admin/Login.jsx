@@ -4,14 +4,15 @@ import toast from "react-hot-toast";
 
 export const Login = () => {
   const { axios, setToken } = useAppContext();
-
+  const [state, setState] = useState("login");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("/api/admin/login", {
+      const { data } = await axios.post(`/api/admin/${state}`, {
         email,
         password,
       });
@@ -46,6 +47,19 @@ export const Login = () => {
             onSubmit={handleSubmit}
             className="mt-4 w-full sm:max-w-md text-gray-600"
           >
+            {state === "register" && (
+              <div className="flex flex-col">
+                <p>Name</p>
+                <input
+                  onChange={(e) => setName(e.target.value)}
+                  value={name}
+                  placeholder="type here"
+                  type="text"
+                  required
+                  className="border-b-2 border-gray-300 p-2 outline-none mb-6 "
+                />
+              </div>
+            )}
             <div className="flex flex-col">
               <label>Email</label>
               <input
@@ -53,7 +67,7 @@ export const Login = () => {
                 value={email}
                 type="email"
                 required
-                placeholder="Your email"
+                placeholder="type here"
                 className="border-b-2 border-gray-300 p-2 outline-none mb-6 "
               />
             </div>
@@ -64,16 +78,37 @@ export const Login = () => {
                 value={password}
                 type="password"
                 required
-                placeholder="Your Password"
+                placeholder="type here"
                 className="border-b-2 border-gray-300 p-2 outline-none mb-6 "
               />
             </div>
+            {state === "register" ? (
+              <p className="text-sm mb-2">
+                Already have account?{" "}
+                <span
+                  onClick={() => setState("login")}
+                  className="cursor-pointer text-primary"
+                >
+                  click here
+                </span>
+              </p>
+            ) : (
+              <p className="text-sm mb-2">
+                Create an account?{" "}
+                <span
+                  onClick={() => setState("register")}
+                  className="cursor-pointer text-primary"
+                >
+                  click here
+                </span>
+              </p>
+            )}
             <button
               type="submit"
               className="w-full py-3 font-medium bg-primary text-white rounded 
-              cursor-pointer hover:bg-primary/90 transition-all rounded-full"
+              cursor-pointer hover:bg-primary/90 transition-all rounded-full mt-2"
             >
-              Login
+              {state === "register" ? "Create Account" : "Login"}
             </button>
           </form>
         </div>
