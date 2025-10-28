@@ -2,6 +2,11 @@ import mongoose from "mongoose";
 
 const RecipeSchema = new mongoose.Schema(
   {
+    adminId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "user", 
+      required: true,
+    },
     title: {
       type: String,
       required: true,
