@@ -7,6 +7,11 @@ const commentSchema = new mongoose.Schema(
       ref: "recipe",
       required: true,
     },
+    adminId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "user", 
+      required: true,
+    },
     name: { type: String, required: true },
     content: { type: String, required: true },
     isApproved: { type: Boolean, default: false },
