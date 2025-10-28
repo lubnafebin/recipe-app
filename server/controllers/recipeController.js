@@ -6,6 +6,7 @@ import main from "../configs/gemini.js";
 
 export const addRecipe = async (req, res) => {
   try {
+    const adminId = req.user.id
     const {
       title,
       category,
@@ -47,6 +48,7 @@ export const addRecipe = async (req, res) => {
       instructions,
       isPublished,
       image,
+      adminId,
     });
     res.json({ success: true, message: "Recipe added successfully" });
   } catch (error) {

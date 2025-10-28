@@ -75,7 +75,8 @@ export const adminLogin = async (req, res) => {
 
 export const getAllRecipesAdmin = async (req, res) => {
   try {
-    const recipes = await Recipe.find({}).sort({ createdAt: -1 });
+    const adminId = req.user.id;
+    const recipes = await Recipe.find({ adminId }).sort({ createdAt: -1 });
     res.json({ success: true, recipes });
   } catch (error) {
     res.json({ success: false, message: error.message });
@@ -84,7 +85,8 @@ export const getAllRecipesAdmin = async (req, res) => {
 
 export const getAllComments = async (req, res) => {
   try {
-    const comments = await Comment.find({})
+    const adminId = req.user.id;
+    const comments = await Comment.find({ adminId })
       .populate("recipe")
       .sort({ createdAt: -1 });
     res.json({ success: true, comments });
@@ -95,12 +97,13 @@ export const getAllComments = async (req, res) => {
 
 export const getDashboard = async (req, res) => {
   try {
-    const recentRecipes = await Recipe.find({})
+    const adminId = req.user.id;
+    const recentRecipes = await Recipe.find({ adminId })
       .sort({ createdAt: -1 })
       .limit(5);
-    const recipes = await Recipe.countDocuments();
-    const comments = await Comment.countDocuments();
-    const drafts = await Recipe.countDocuments({ isPublished: false });
+    const recipes = await Recipe.countDocuments({ adminId });
+    const comments = await Comment.countDocuments({ adminId });
+    const drafts = await Recipe.countDocuments({ isPublished: false, adminId });
     const dashboardData = {
       recentRecipes,
       recipes,
