@@ -33,12 +33,7 @@ export const AIGenerator = () => {
 
       if (data.success) {
         // Clean AI response
-        const cleanText = data.content
-          .replace(/\*\*(.*?)\*\*/g, "$1") // remove bold
-          .replace(/\*(.*?)\*/g, "$1") // remove italics
-          .replace(/^\s*[\d\-*]+\.\s*/gm, "") // remove numbered/bulleted lists
-          .trim();
-
+        const cleanText = data.content;
         setMessages((prev) => [...prev, { sender: "ai", text: cleanText }]);
       } else {
         toast.error(data.message);
