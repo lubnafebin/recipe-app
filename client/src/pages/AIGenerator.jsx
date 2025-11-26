@@ -95,6 +95,17 @@ export const AIGenerator = () => {
             </div>
           </div>
         ))}
+
+        {/* Typing Indicator */}
+        {loading && (
+          <div className="flex my-2 justify-start">
+            <div className="bg-white text-gray-800 max-w-[80%] p-3 rounded-xl rounded-tl-none flex items-center gap-1">
+              <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></span>
+              <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-150"></span>
+              <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-300"></span>
+            </div>
+          </div>
+        )}
         <div ref={messagesEndRef} />
       </div>
 
